@@ -29,6 +29,11 @@ async function run() {
       if (cidrs) {
         core.info(`GitHub meta CIDRs to add: ${JSON.stringify(cidrs)}`);
         await addCidrsToEnterprise(targetEnterprise, cidrs, isActive, `GitHub Meta CIDR for ${metadataSection}`);
+        // Retrieve the IP allow list entries for the metadata section and log their isActive property
+        const metadataIpAllowListEntries = await targetEnterprise.getEnterpriseIpAllowListEntries({ metadata: metadataSection });
+        for (const entry of metadataIpAllowListEntries) {
+          console.log(`IP allow list entry ${entry.name} for metadata section ${metadataSection} is active: ${entry.isActive}`);
+        }
       } else {
         throw new Error(`The metadata CIDRs for '${metadataSection}' were unable to be resolved.`);
       }
@@ -38,6 +43,12 @@ async function run() {
       const cidrs = getCidrs(customCidrs);
       core.info(`Custom CIDRs to add: ${JSON.stringify(cidrs)}`);
       await addCidrsToEnterprise(targetEnterprise, cidrs, isActive, core.getInput('custom_cidrs_label'));
+  
+      const ipAllowListEntries = await targetEnterprise.getEnterpriseIpAllowListEntries();
+      // Loop through the IP allow list entries and log their isActive property
+      for (const entry of ipAllowListEntries) {
+        console.log(`IP allow list entry ${entry.name} is active: ${entry.isActive}`);
+      }
     }
   } catch (err) {
     core.setFailed(err);
