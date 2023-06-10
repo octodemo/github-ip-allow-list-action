@@ -57,19 +57,19 @@ async function run() {
 
 run();
 
-async function addCidrsToEnterprise(enterprise, cidrs, isActive, label) {
+async function addCidrsToEnterprise(enterprise, cidrs, label) {
   const ipAllowListEntries = await enterprise.getEnterpriseIpAllowListEntries();
   for (const entry of ipAllowListEntries) {
     if (entry.name === label) {
       core.startGroup(`Updating IP Allow List Entry: ${label}`);
-      await entry.update({ cidrs, isActive });
+      await entry.update({ cidrs, isActive: true });
       core.endGroup();
       return;
     }
   }
 
   core.startGroup(`Building IP Allow List Entry: ${label}`);
-  await enterprise.addAllowListCIDRs(label, cidrs, isActive);
+  await enterprise.addAllowListCIDRs(label, cidrs, true);
   core.endGroup();
 }
 
