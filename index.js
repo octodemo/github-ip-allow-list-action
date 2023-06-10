@@ -73,6 +73,14 @@ async function addCidrsToEnterprise(enterprise, cidrs, label) {
   core.endGroup();
 }
 
+async function updateAllIpAllowListEntries(enterprise) {
+  const ipAllowListEntries = await enterprise.getEnterpriseIpAllowListEntries();
+  for (const entry of ipAllowListEntries) {
+    core.info(`Updating IP Allow List Entry: ${entry.name}`);
+    await addCidrsToEnterprise(enterprise, entry.cidrs, entry.name);
+  }
+}
+
 async function getMetaCIDRs(octokit, name) {
   const results = await octokit.rest.meta.get();
   core.info(`Loaded GitHub Meta API CIDRs`);
