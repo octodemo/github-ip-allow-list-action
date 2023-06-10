@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/peter-murray/github-ip-allow-lists-action.git"
+    "url": "git+https://github.com/octodemo/github-ip-allow-lists-action.git"
   },
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/peter-murray/github-ip-allow-lists-action/issues"
+    "url": "https://github.com/octodemo/github-ip-allow-lists-action/issues"
   },
-  "homepage": "https://github.com/peter-murray/github-ip-allow-lists-action#readme",
+  "homepage": "https://github.com/octodemo/github-ip-allow-lists-action#readme",
   "dependencies": {
     "@actions/core": "^1.6.0",
     "@octokit/core": "^3.5.1",
