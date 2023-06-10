@@ -46,7 +46,7 @@ async function run() {
     // Adding custom CIDRs to the enterprise
     if (customCidrs) {
       const cidrs = getCidrs(customCidrs);
-      core.info(`Custom CIDRs to add: ${JSON.stringify(cidrs)}`);
+      core.info(`Custom CIDRs to addweee: ${JSON.stringify(cidrs)}`);
       await addCidrsToEnterprise(targetEnterprise, cidrs, isActive, core.getInput('custom_cidrs_label'));
     }
   } catch (err) {
